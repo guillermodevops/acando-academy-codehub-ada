@@ -1,7 +1,7 @@
 node{
 	cleanWs()
-	def command_compile = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node:12-alpine npm install';
-	def command_unittest = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node:12-alpine npm run test';
+	def command_compile = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node12-chrome:0.1 npm install';
+	def command_unittest = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node12-chrome:0.1 npm run test';
 	def project_name = "No name";
 	def project_version = "No version";
 	
