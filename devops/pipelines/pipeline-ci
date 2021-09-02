@@ -1,0 +1,7 @@
+@Library('jenkins-sharedlib-pipelines@develop') _
+
+def deployEnvironment = 'dev'
+
+env.deployEnvironment = "${deployEnvironment}"
+
+nodeCI.call();
