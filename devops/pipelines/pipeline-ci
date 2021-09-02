@@ -1,7 +1,25 @@
-@Library('jenkins-sharedlib-pipelines@develop') _
-
-def deployEnvironment = 'dev'
-
-env.deployEnvironment = "${deployEnvironment}"
-
-nodeCI.call();
+node{
+	cleanWs()
+	def command_compile = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node:12-alpine npm install';
+	def command_unittest = 'docker run --rm --cpus=1 -v ${WORKSPACE}:/app -w /app node:12-alpine npm run test';
+	def project_name = "No name";
+	def project_version = "No version";
+	
+	stage('Download Repository'){
+		checkout scm
+	}
+	stage('Getting Info'){
+		
+		project_name = steps.sh script: "jq --raw-output '.name' ./package.json", returnStdout: true
+		project_version = steps.sh script: "jq --raw-output '.version' ./package.json", returnStdout: true
+		
+		echo "${project_name}"
+		echo "${project_version}"
+	}
+	stage('Compilation'){
+		
+	}
+	stage('Unit Test'){
+		sh command_unittest
+	}
+}
